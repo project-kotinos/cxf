@@ -1,0 +1,15 @@
+dependencies:
+  build:
+   - maven:3.5.4
+   - java:11.0.8
+
+build_targets:
+  - name: default
+    container:
+      image: yourbase/yb_ubuntu:18.04
+    commands:
+      - mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -DremoteRepositories=https://repository.apache.org/snapshots,https://repository.apache.org -Dartifact=org.apache.cxf:cxf-core:3.4.1-SNAPSHOT:jar -Dtransitive=false -Ddest=glassfish5/glassfish/lib
+ci:
+  builds:
+    - name: default
+      build_target: default
